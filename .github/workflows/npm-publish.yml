@@ -1,0 +1,72 @@
+name: Publish release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Get and validate version number
+        id: get-version
+        run: |
+          VERSION=$(echo "${GITHUB_REF}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${GITHUB_REF}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+    env:
+      GITHUB_REF: ${{ github.ref }}
+    outputs:
+      version: ${{ steps.get-version.outputs.VERSION }}
+
+  tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs:
+      - version-check
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm run test
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/@nationalarchives/eslint-config
+    needs:
+      - tests
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org/
+          scope: "@nationalarchives"
+      # - name: Update npm
+      #   run: npm install -g npm@latest
+      # - name: Show npm version
+      #   run: npm --version  # Needs to be at least 11.5.1
+      - name: Install dependencies
+        run: npm ci
+      - name: Build package
+        run: npm run build:package
+      - name: Publish to npm
+        run: npm publish
