@@ -5,13 +5,11 @@ on:
     types:
       - published
 
-permissions:
-  id-token: write
-  contents: write
-
 jobs:
   version-check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -19,15 +17,19 @@ jobs:
       - name: Get and validate version number
         id: get-version
         run: |
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          VERSION=$(echo "${GITHUB_REF}" | sed -e 's,.*/\(.*\),\1,')
           # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          [[ "${GITHUB_REF}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
           echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
+    env:
+      GITHUB_REF: ${{ github.ref }}
     outputs:
       version: ${{ steps.get-version.outputs.VERSION }}
 
   tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs:
       - version-check
     steps:
@@ -41,6 +43,9 @@ jobs:
 
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     environment:
       name: npm
       url: https://www.npmjs.com/package/@nationalarchives/eslint-config
