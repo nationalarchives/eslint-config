@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config index.mjs)",
+    "self:test": "eslint '**/*' --config index.mjs",
+    "self:fix": "eslint '**/*' --config index.mjs --fix",
     "prettier": "npx prettier --write ."
   },
   "repository": {
