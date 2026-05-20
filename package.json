@@ -1,13 +1,13 @@
 {
   "name": "@nationalarchives/eslint-config",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A global ESLint config for The National Archives",
   "keywords": [
     "eslint",
     "eslint-config"
   ],
   "scripts": {
-    "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config eslint.config.js)",
+    "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config index.mjs)",
     "prettier": "npx prettier --write ."
   },
   "repository": {
@@ -21,18 +21,17 @@
   },
   "license": "MIT",
   "type": "module",
-  "main": "index.js",
-  "workspaces": [
-    "."
-  ],
+  "main": "index.mjs",
   "bugs": {
     "url": "https://github.com/nationalarchives/eslint-config/issues"
   },
   "homepage": "https://github.com/nationalarchives/eslint-config#readme",
-  "dependencies": {
-    "@eslint/eslintrc": "^3.0.0",
+  "devDependencies": {
     "@eslint/js": "^10.0.0",
     "eslint": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-promise": "^7.3.0",
     "globals": "^17.0.0"
   }
 }
