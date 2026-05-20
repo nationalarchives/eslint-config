@@ -2,6 +2,10 @@
   "name": "@nationalarchives/eslint-config",
   "version": "0.1.1",
   "description": "A global ESLint config for The National Archives",
+  "keywords": [
+    "eslint",
+    "eslint-config"
+  ],
   "scripts": {
     "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config eslint.config.js)",
     "prettier": "npx prettier --write ."
@@ -16,14 +20,23 @@
     "url": "https://andrewhosgood.dev"
   },
   "license": "MIT",
+  "type": "module",
+  "main": "index.js",
+  "workspaces": [
+    "."
+  ],
   "bugs": {
     "url": "https://github.com/nationalarchives/eslint-config/issues"
   },
   "homepage": "https://github.com/nationalarchives/eslint-config#readme",
-  "peerDependencies": {
+  "dependencies": {
     "@eslint/eslintrc": "^3.0.0",
     "@eslint/js": "^10.0.0",
     "eslint": "^10.0.0",
     "globals": "^17.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
