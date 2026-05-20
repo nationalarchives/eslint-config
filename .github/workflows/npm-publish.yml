@@ -52,10 +52,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@nationalarchives"
       - name: Show npm version
-        run: npm --version  # Needs to be at least 11.5.1
+        run: npm --version # Needs to be at least 11.5.1
       - name: Update npm
         run: npm install -g npm@latest
       - name: Show npm version
-        run: npm --version  # Needs to be at least 11.5.1
+        run: npm --version # Needs to be at least 11.5.1
       - name: Publish to npm
         run: npm publish
