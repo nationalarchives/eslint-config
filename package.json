@@ -34,9 +34,5 @@
     "@eslint/js": "^10.0.0",
     "eslint": "^10.0.0",
     "globals": "^17.0.0"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
   }
 }
