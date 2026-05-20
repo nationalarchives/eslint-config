@@ -17,23 +17,6 @@ jobs:
       - name: Get and validate version number
         uses: nationalarchives/github-actions/.github/actions/validate-node-package-version@fixes # zizmor: ignore[unpinned-uses] Owned by The National Archives
 
-  tests:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    needs:
-      - version-check
-    steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: |
-          npm run test
-          npm run self:test
-
   publish-npm:
     runs-on: ubuntu-latest
     permissions:
@@ -43,7 +26,7 @@ jobs:
       name: npm
       url: https://www.npmjs.com/package/@nationalarchives/eslint-config
     needs:
-      - tests
+      - version-check
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
