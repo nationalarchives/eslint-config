@@ -1,6 +1,6 @@
 {
   "name": "@nationalarchives/eslint-config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A global ESLint config for The National Archives",
   "scripts": {
     "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config eslint.config.js)",
@@ -20,10 +20,10 @@
     "url": "https://github.com/nationalarchives/eslint-config/issues"
   },
   "homepage": "https://github.com/nationalarchives/eslint-config#readme",
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.4.0",
-    "globals": "^17.6.0"
+  "peerDependencies": {
+    "@eslint/eslintrc": "^3.0.0",
+    "@eslint/js": "^10.0.0",
+    "eslint": "^10.0.0",
+    "globals": "^17.0.0"
   }
 }
