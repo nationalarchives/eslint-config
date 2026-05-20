@@ -15,16 +15,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Get and validate version number
-        id: get-version
-        run: |
-          VERSION=$(echo "${GITHUB_REF}" | sed -e 's,.*/\(.*\),\1,')
-          # Strip "v" prefix from tag name
-          [[ "${GITHUB_REF}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
-    env:
-      GITHUB_REF: ${{ github.ref }}
-    outputs:
-      version: ${{ steps.get-version.outputs.VERSION }}
+        uses: nationalarchives/github-actions/.github/actions/validate-node-package-version@main # zizmor: ignore[unpinned-uses] Owned by The National Archives
 
   tests:
     runs-on: ubuntu-latest
@@ -59,13 +50,5 @@ jobs:
         with:
           registry-url: https://registry.npmjs.org/
           scope: "@nationalarchives"
-      # - name: Update npm
-      #   run: npm install -g npm@latest
-      # - name: Show npm version
-      #   run: npm --version  # Needs to be at least 11.5.1
-      - name: Install dependencies
-        run: npm ci
-      - name: Build package
-        run: npm run build:package
       - name: Publish to npm
         run: npm publish
