@@ -1,8 +1,8 @@
+import eslint from "@eslint/js";
 import { defineConfig, globalIgnores } from "eslint/config";
+import { importX as pluginImportX } from "eslint-plugin-import-x";
 import pluginPromise from "eslint-plugin-promise";
 import globals from "globals";
-import eslint from "@eslint/js";
-import { importX as pluginImportX } from "eslint-plugin-import-x";
 
 export default defineConfig([
   {
@@ -24,7 +24,6 @@ export default defineConfig([
       "import-x": pluginImportX,
     },
     rules: {
-      // Check import or require statements are A-Z ordered
       "import-x/order": [
         "error",
         {
@@ -32,6 +31,8 @@ export default defineConfig([
           "newlines-between": "always",
         },
       ],
+      "sort-imports": ["error", { ignoreDeclarationSort: true }],
+      "sort-keys": ["off"],
     },
   },
   globalIgnores(["**/.cache/**", "!.*", "node_modules", "node_modules/.*"]),

@@ -1,6 +1,6 @@
 {
   "name": "@nationalarchives/eslint-config",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A global ESLint config for The National Archives",
   "keywords": [
     "eslint",
@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config index.mjs)",
+    "self:test": "eslint '**/*' --config index.mjs",
+    "self:fix": "eslint '**/*' --config index.mjs --fix",
     "prettier": "npx prettier --write ."
   },
   "repository": {

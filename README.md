@@ -10,14 +10,17 @@
 npm install -D @nationalarchives/eslint-config
 ```
 
-## `eslint.config.js`
+## `eslint.config.mjs`
 
 ```js
 import { defineConfig } from "eslint/config";
+import tnaEslintConfig from "@nationalarchives/eslint-config";
 
-export default defineConfig([
-  {
-    extends: ["@nationalarchives/eslint-config"],
-  },
-]);
+export default defineConfig([...tnaEslintConfig]);
 ```
+
+## Dependencies and plugins
+
+- [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+- [eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x)
+- [eslint-plugin-promise](https://github.com/eslint-community/eslint-plugin-promise)
