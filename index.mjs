@@ -43,5 +43,11 @@ export default defineConfig([
       "sort-vars": "warn",
     },
   },
-  globalIgnores(["**/.cache/**", "!.*", "node_modules", "node_modules/.*"]),
+  globalIgnores([
+    "**/.cache/**",
+    "**/*.min.js",
+    "!.*",
+    "node_modules",
+    "node_modules/.*",
+  ]),
 ]);
