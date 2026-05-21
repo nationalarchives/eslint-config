@@ -1,8 +1,12 @@
+import { fileURLToPath } from "node:url";
+
 import eslint from "@eslint/js";
-import { defineConfig, globalIgnores } from "eslint/config";
-import { importX as pluginImportX } from "eslint-plugin-import-x";
+import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
+import { importX } from "eslint-plugin-import-x";
 import pluginPromise from "eslint-plugin-promise";
 import globals from "globals";
+
+const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default defineConfig([
   {
@@ -11,6 +15,7 @@ export default defineConfig([
       eslint.configs.all,
       eslint.configs.recommended,
       pluginPromise.configs["flat/recommended"],
+      importX.configs["flat/recommended"],
     ],
     languageOptions: {
       globals: {
@@ -21,7 +26,7 @@ export default defineConfig([
       },
     },
     plugins: {
-      "import-x": pluginImportX,
+      "import-x": importX,
     },
     rules: {
       "import-x/order": [
@@ -43,11 +48,11 @@ export default defineConfig([
       "sort-vars": "warn",
     },
   },
+  includeIgnoreFile(gitignorePath, { gitignoreResolution: true }),
   globalIgnores([
-    "**/.cache/**",
     "**/*.min.js",
-    "!.*",
-    "node_modules",
-    "node_modules/.*",
+    "**/*.config.js",
+    "**/.cache/**",
+    "**/node_modules/",
   ]),
 ]);
