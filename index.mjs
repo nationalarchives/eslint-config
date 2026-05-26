@@ -1,13 +1,9 @@
-import { fileURLToPath } from "node:url";
-
 import eslint from "@eslint/js";
-import { defineConfig, globalIgnores, includeIgnoreFile } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import { importX } from "eslint-plugin-import-x";
 import noSecrets from "eslint-plugin-no-secrets";
 import pluginPromise from "eslint-plugin-promise";
 import globals from "globals";
-
-const gitignorePath = fileURLToPath(new URL(".gitignore", import.meta.url));
 
 export default defineConfig([
   {
@@ -53,7 +49,6 @@ export default defineConfig([
       "no-secrets/no-secrets": "error",
     },
   },
-  includeIgnoreFile(gitignorePath, { gitignoreResolution: true }),
   globalIgnores([
     "**/*.min.js",
     "**/*.config.js",
