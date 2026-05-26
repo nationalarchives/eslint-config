@@ -1,15 +1,15 @@
 {
   "name": "@nationalarchives/eslint-config",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A global ESLint config for The National Archives",
   "keywords": [
     "eslint",
     "eslint-config"
   ],
   "scripts": {
-    "test": "! (echo 'class Foo {static {}}' | eslint --stdin --config index.mjs)",
-    "self:test": "eslint '**/*' --config index.mjs",
-    "self:fix": "eslint '**/*' --config index.mjs --fix",
+    "test": "node test.js",
+    "self:test": "eslint '{index,eslint.config,test}.{mjs,js}' --config index.mjs",
+    "self:fix": "eslint '{index,eslint.config,test}.{mjs,js}' --config index.mjs --fix",
     "prettier": "npx prettier --write ."
   },
   "repository": {
@@ -33,6 +33,7 @@
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-no-secrets": "^2.3.3",
     "eslint-plugin-promise": "^7.3.0",
     "globals": "^17.0.0"
   }
