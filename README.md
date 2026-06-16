@@ -19,6 +19,16 @@ import tnaEslintConfig from "@nationalarchives/eslint-config";
 export default defineConfig([...tnaEslintConfig]);
 ```
 
+## Ignored files
+
+This config tests all `.js`, `.mjs` and `.cjs` files except for:
+
+- `**/*.min.js`
+- `**/*.map.js`
+- `**/*.config.js`
+- `**/.cache/**`
+- `**/node_modules/`
+
 ## Dependencies and plugins
 
 - [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
