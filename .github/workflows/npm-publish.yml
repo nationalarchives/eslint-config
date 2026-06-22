@@ -15,7 +15,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Get and validate version number
-        uses: nationalarchives/github-actions/.github/actions/validate-node-package-version@fixes # zizmor: ignore[unpinned-uses] Owned by The National Archives
+        uses: nationalarchives/github-actions/.github/actions/validate-node-package-version@main # zizmor: ignore[unpinned-uses] Owned by The National Archives
 
   publish-npm:
     runs-on: ubuntu-latest
