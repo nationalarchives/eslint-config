@@ -53,6 +53,7 @@ export default defineConfig([
     "**/*.min.js",
     "**/*.map.js",
     "**/*.config.js",
+    "**/*.config.mjs",
     "**/.cache/**",
     "**/node_modules/",
   ]),
