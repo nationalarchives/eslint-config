@@ -1,6 +1,6 @@
 {
   "name": "@nationalarchives/eslint-config",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "A global ESLint config for The National Archives",
   "keywords": [
     "eslint",
@@ -28,7 +28,7 @@
     "url": "https://github.com/nationalarchives/eslint-config/issues"
   },
   "homepage": "https://github.com/nationalarchives/eslint-config#readme",
-  "dependencies": {
+  "peerDependencies": {
     "@eslint/js": "^10.0.0",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",

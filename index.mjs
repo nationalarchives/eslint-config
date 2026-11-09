@@ -52,6 +52,7 @@ export default defineConfig([
   globalIgnores([
     "**/*.min.js",
     "**/*.map.js",
+    "**/*.js.map",
     "**/*.config.js",
     "**/*.config.mjs",
     "**/.cache/**",
